@@ -12,8 +12,8 @@ A simple Flask-based web application that allows users to get real-time weather 
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/weather-app.git
-cd weather-app
+git clone https://github.com/LaithALhaware/Weather-Forecast-App.git
+cd Weather-Forecast-App
 ```
 
 2. Install the required dependencies :
