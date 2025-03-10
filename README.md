@@ -32,3 +32,28 @@ Run the app on CMD :
 ```bash
 python app-CMD.py
 ```
+
+## 🗂️ Project Structure 
+```bash
+Weather-Forecast-App/
+│
+├── app-GUI.py            # Main Flask application file
+├── app-CMD.py                
+├── templates/
+│   └── index.html        # HTML template for the weather app
+├── requirements.txt      # List of project dependencies
+└── README.md             # This file
+```
+
+
+
+## 📝 License
+[[License](LICENSE)] ⚖️
+
+
+## ❤️ Support This Project
+If you find this project useful, consider supporting its development:
+
+💰 Via PayPal: [[PayPal Link](https://www.paypal.com/ncp/payment/KC9EETJDVZQHG)]
+
+Your support helps keep this project alive! 🚀🔥
