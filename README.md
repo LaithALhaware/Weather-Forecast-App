@@ -1,5 +1,5 @@
 # 🌤️ Weather App 🌦️
-
+![Image](Images/Capture.JPG)
 A simple Flask-based web application that allows users to get real-time weather information for any city. The weather data is fetched from the [wttr.in](https://wttr.in/) service, and the app displays the weather conditions along with relevant emojis.
 
 ## ✨ Features 
