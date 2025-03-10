@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 800px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            width: 70%;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .weather-info {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #555;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .weather-info h2 {
+            margin-bottom: 10px;
+            color: #4CAF50;
+        }
+
+        #map {
+            height: 400px;
+            width: 100%;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .emoji {
+            font-size: 30px;
+            margin-left: 10px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Weather Forecast App</h1>
+
+        <!-- City Input Form -->
+        <form method="POST" action="/weather">
+            <label for="city">Enter City:</label>
+            <input type="text" id="city" name="city" placeholder="e.g. London" required>
+            <button type="submit">Get Weather</button>
+        </form>
+
+        {% if weather %}
+            <div class="weather-info">
+                <h2>Weather for {{ city }}:</h2>
+                <p>{{ weather }} <span class="emoji">{{ weather_emoji }}</span></p>
+            </div>
+        {% endif %}
+
+        <!-- Map -->
+        <div id="map"></div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        var map = L.map('map').setView([51.505, -0.09], 2);  // Default map centered at lat: 51.505, lon: -0.09
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        {% if lat and lon %}
+            var lat = {{ lat }};
+            var lon = {{ lon }};
+            var cityName = "{{ city }}";
+
+            // Add marker to the map
+            var marker = L.marker([lat, lon]).addTo(map);
+            marker.bindPopup("<b>" + cityName + "</b><br>" + "{{ weather }}").openPopup();
+            map.setView([lat, lon], 10);  // Zoom to city location
+        {% endif %}
+    </script>
+</body>
+</html>
